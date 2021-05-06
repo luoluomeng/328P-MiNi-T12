@@ -1,0 +1,47 @@
+language: c
+sudo: false
+cache:
+  directories:
+    - ~/arduino_ide
+    - ~/.arduino15/packages/
+git:
+  depth: false
+  quiet: true
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-trusty-5.0
+      - key_url: "http://apt.llvm.org/llvm-snapshot.gpg.key"
+    packages:
+      - clang-format-5.0
+env:
+  global:
+    - ARDUINO_IDE_VERSION="1.8.13"
+    - PRETTYNAME="328P-T12"
+    - INSTALL_PLATFORMS="uno"
+# Optional, will default to "$TRAVIS_BUILD_DIR/Doxyfile"
+#    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+before_install:
+  - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
+  - curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/run-clang-format.py > run-clang-format.py
+install:
+  - rm -rf $HOME/arduino_ide/libraries/U8g2
+  - mv $PWD/code/U8g2 $HOME/arduino_ide/libraries
+  - ls $HOME/arduino_ide/libraries/
+  - arduino --install-library "DebounceEvent"
+script:
+  #- python run-clang-format.py -r $PWD/code/src
+  - build_platform uno
+before_deploy:
+  - ls $ARDUINO_HEX_DIR/uno/src/
+deploy:
+  provider: releases
+  api_key:
+    secure: rjL0IeOfNtpl3X9YhLvfoApdY3BjYrA7xAux0AYmcQQ0eoskzQd7cZr1fnzZ+oLyb8mGhpmVi0l0KgmBEdK6DD00C6h1sD4/jF/v0Sl7yMy4LqcRUcNAZmay+cEcScxu8/Kqk7n7mgfVlzMt8nE2tTg5ABneOMLKAZ95j0yeanT0XofrwRisWMa9CCoUvchrzD73SoqxLbtk0M2BbGBLPxyfUJ6bpNzVGa7HEjsz9y+cVGTptXqve1YUoQ4QSBFt1WrHRi3ILh/YbazneKvCrAzAxGhlqeexVfFOE7lRmmDXiShfPLaFXeYmDY5Sel7T6xJSIhX422cIDsG5Pm5L6GtPmZvLaFNEUe+rWzdVlC/s4OaSipXfOXqWl7U6EYWImWSkgfnGNQrjDODYJ5PgGxorZAl6xB/UW9WNj7oq33cwex+/QfKXoZYqJHOKhruCWJVgiIjziO1B7h52hGqOLtvRDidrR1/6X5x5nm+P1z+xnRQy5OvV4RhewftTk8+iBxC2YkEhf+7o9fw3abk4j5WChIXjXysGZZyQ/d3lnxtcq0gXC5by1yZlKPYGPWG+lhn93ZS7kXa5VDhk9MUk+KUICyok08l0NjjMJ19IM50br4j72hskpmoSg2NPibxTl8liT/54Plk1oDT6BGY0Y/GhrqS/FruJXmb3vocOx1E=
+  file:
+    - $ARDUINO_HEX_DIR/uno/src/src.ino.hex
+    - $ARDUINO_HEX_DIR/uno/src/src.ino.with_bootloader.hex
+  skip_cleanup: true
+  on:
+    all_branches: true
+    tags: yes
