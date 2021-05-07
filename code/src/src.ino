@@ -55,7 +55,6 @@
 #include "defs.h"
 //#include <MsTimer2.h>
 
-
 #include "InterruptKey.h"
 #include "buzzer.h"
 #include "sleeptimer.h"
@@ -102,11 +101,9 @@ void initADC()
     ADCSRA |= bit(ADIE);               // 开启ADC中断
 }
 
-DebounceEvent rightBtn = DebounceEvent(SW, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
-DebounceEvent enterBtn = DebounceEvent(RX, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
-DebounceEvent leftBtn = DebounceEvent(TX, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
-DebounceEvent enterBtn2 = DebounceEvent(CLK, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
-DebounceEvent leftBtn2 = DebounceEvent(DT, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
+//DebounceEvent rightBtn = DebounceEvent(SW, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
+// DebounceEvent enterBtn = DebounceEvent(CLK, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
+// DebounceEvent leftBtn = DebounceEvent(DT, onKeyPress, BUTTON_PUSHBUTTON | BUTTON_DEFAULT_HIGH | BUTTON_SET_PULLUP, CUSTOM_DEBOUNCE_DELAY, CUSTOM_REPEAT_DELAY);
 
 void initT12()
 {
@@ -148,11 +145,10 @@ void loop()
 {
     __asm__ __volatile__("wdr"); //看门狗复位
 
-    leftBtn.loop();
-    rightBtn.loop();
-    enterBtn.loop();
-    leftBtn2.loop();
-    enterBtn2.loop();
+    //leftBtn.loop();
+    //rightBtn.loop();
+    //enterBtn.loop();
+    keyLoop();
 
     showPage();   //刷新屏幕
     buzzer_run(); //蜂鸣器运行决策

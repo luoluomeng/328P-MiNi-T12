@@ -4,7 +4,7 @@
 
 #include <Arduino.h>
 #include <EEPROM.h>
-#include <DebounceEvent.h>
+//#include <DebounceEvent.h>
 
 #define KEYCODE_Enter 0
 #define KEYCODE_RIGHT 1
@@ -12,8 +12,20 @@
 #define KEYCODE_UP 3
 #define KEYCODE_DOWN 4
 
-void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length);
+typedef struct KeyStatus
+{
+    bool status;
+    bool ready = false;
+    bool reset_count = true;
+    unsigned long event_start;
+    unsigned long event_length;
+    unsigned char event_count = 0;
+};
 
+void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length);
+void keyLoop();
+void checkKey(uint8_t pin, KeyStatus &status);
+void handleMove(int keycode);
 void handleEnter();
 void handleEnterLongPress();
 

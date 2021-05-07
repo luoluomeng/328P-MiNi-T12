@@ -276,4 +276,19 @@ extern int16_t settings_dh_x_count; //设置界面动画x增量记录
 #define calibrationSettings_y2 18
 #define calibrationSettings_y3 31
 
+#define KEYCODE_Enter 0
+#define KEYCODE_RIGHT 1
+#define KEYCODE_LEFT 2
+#define KEYCODE_UP 3
+#define KEYCODE_DOWN 4
+
+#define CUSTOM_DEBOUNCE_DELAY 10
+#define CUSTOM_REPEAT_DELAY 100
+#define DEBOUNCE_DELAY 10
+#define REPEAT_DELAY 100
+#define EVENT_NONE 0
+#define EVENT_CHANGED 1
+#define EVENT_PRESSED 2
+#define EVENT_RELEASED 3
+#define DEFAULT_STATUS 1
 #endif

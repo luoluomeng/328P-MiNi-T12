@@ -39,8 +39,12 @@ void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length)
     default:
         return;
     }
-
+    handleMove(keycode);
     //buzzer(50);
+}
+
+void handleMove(int keycode)
+{
     switch (display_count)
     {
     case HOME:
@@ -669,5 +673,75 @@ void calibrationMove(int keycode) //设置界面 旋转
             sz_temp[3] += 1;
         else if (keycode == KEYCODE_RIGHT)
             sz_temp[3] -= 1;
+    }
+}
+
+KeyStatus sw_status;
+KeyStatus dt_status;
+KeyStatus clk_status;
+
+void keyLoop()
+{
+    //checkKey(SW, sw_status);
+    //checkKey(DT, dt_status);
+    //checkKey(CLK, clk_status);
+}
+
+void checkKey(uint8_t pin, KeyStatus &status)
+{
+
+    unsigned char event = EVENT_NONE;
+
+    if (digitalRead(pin) != status.status)
+    {
+
+        // Debounce
+        unsigned long start = millis();
+        while (millis() - start < DEBOUNCE_DELAY)
+            delay(1);
+
+        if (digitalRead(pin) != status.status)
+        {
+
+            status.status = !status.status;
+
+            // released
+            if (status.status == DEFAULT_STATUS)
+            {
+
+                status.event_length = millis() - status.event_start;
+                status.ready = true;
+
+                // pressed
+            }
+            else
+            {
+
+                event = EVENT_PRESSED;
+                status.event_start = millis();
+                status.event_length = 0;
+                if (status.reset_count)
+                {
+                    status.event_count = 1;
+                    status.reset_count = false;
+                }
+                else
+                {
+                    ++status.event_count;
+                }
+                status.ready = false;
+            }
+        }
+    }
+
+    if (status.ready && (millis() - status.event_start > REPEAT_DELAY))
+    {
+        status.ready = false;
+        status.reset_count = true;
+        event = EVENT_RELEASED;
+    }
+    if (event != EVENT_NONE)
+    {
+        onKeyPress(pin, event, status.event_count, status.event_length);
     }
 }
