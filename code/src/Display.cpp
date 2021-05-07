@@ -1,5 +1,11 @@
+#include "defs.h"
+#include "display.h"
+#include "DisplayMain.h"
+#include "DisplaySet.h"
+#include <EEPROM.h>
+#include "WDT.h"
 //********** 显示决策 **********
-uint32_t system_sleep_db_time = 0; //系统进入睡眠对比时间
+
 void display()
 {
     if (xp_state == 0) //正常显示

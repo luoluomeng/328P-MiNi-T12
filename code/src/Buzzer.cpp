@@ -1,5 +1,6 @@
 //********** 控制蜂鸣器发声的频率和时间，系统延时法，占用系统速度大 **********
-uint32_t error_buzzer_db_time = 0;
+#include "defs.h"
+#include "buzzer.h"
 void buzzer(uint16_t timems)
 {
     buzzer_state = 1;

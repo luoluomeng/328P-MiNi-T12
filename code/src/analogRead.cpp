@@ -1,13 +1,10 @@
+#include "defs.h"
+#include "analogRead.h"
+#include "PID.h"
+#include <avr/sleep.h> //休眠库
 //********** 读取电压、电流、温度 **********
-float vin_cache = 0.0;
-uint8_t vin_cache_count = 0;
 
-float tc1047_cache = 0.0;
-uint8_t tc1047_cache_count = 0;
-
-#define cycs 10                  //时间平均滤波的采样次数 采样周期 = 采样次数*定时执行任务的时间
-uint8_t t12_adc_error_count = 0; //t12ADC超出检测范围错误计数
-void onPIDTimer()                //定时读取电源电压和机内温度
+void onPIDTimer() //定时读取电源电压和机内温度
 {
     if (millis() - vin_read_time > t12_temp_read_time)
     {

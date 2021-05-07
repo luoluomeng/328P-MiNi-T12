@@ -1,3 +1,5 @@
+#include "defs.h"
+#include <EEPROM.h>
 //******************* 自动刷写eeprom *******************
 void initEEPROM()
 {

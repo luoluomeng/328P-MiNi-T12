@@ -1,24 +1,6 @@
-//********** 画主界面 **********
-uint8_t zjm_x1 = 0;
-uint8_t zjm_x2 = 100;
-#define zjm_x3 75
-#define zjm_x4 zjm_x3 + 4
-
-#define zjm_y1 7
-#define zjm_y2 19
-#define zjm_y3 32
-#define zjm_y4 14
-boolean zjm_dh_run = 0;    //主界面动画状态 0-不允许 1-允许
-uint32_t zjm_dh_time1 = 0; //动画1运转对比时间
-uint32_t zjm_dh_time2 = 0; //动画2运转对比时间
-//热、停切换动画变量
-uint8_t zjm_dh_x1 = 0;
-uint8_t zjm_dh_y1 = 0;
-uint8_t zjm_dh_r1 = 1;
-//pwm动效动画
-uint8_t zjm_dh_l[14];
-//开机过度动画y增量
-int8_t zjm_dh_y = 32;
+#include "defs.h"
+#include "DisplayMain.h"
+#include <EEPROM.h>
 void homePage()
 {
     //****** 画当前温度及烙铁错误提示

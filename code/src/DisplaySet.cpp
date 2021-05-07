@@ -1,9 +1,6 @@
-//********** 画设置主界面及其他界面 **********
-#define settings_y1 21
-int16_t settings_dh_x[6] = {0, 50, 100, 150, 200, 250};
-int16_t settings_dh_x_count = 0; //设置界面动画x增量记录
-
-#define settings_dh_bc 5 //变化步长，只能为5的倍数
+#include "defs.h"
+#include "DisplaySet.h"
+#include "DisplayMain.h"
 void settingsHome()
 {
     //画十字坐标
@@ -87,15 +84,6 @@ void settingsHome()
     u8g2.setDrawColor(1);
 }
 
-//********** PID设置界面 **********
-#define pidSettings_x1 2
-#define pidSettings_x2 14
-
-#define pidSettings_x3 82
-#define pidSettings_x4 94
-
-#define pidSettings_y1 14
-#define pidSettings_y2 29
 void pidSettings()
 {
     u8g2.setCursor(pidSettings_x1, pidSettings_y1);
@@ -158,11 +146,6 @@ void pidSettings()
     }
 }
 
-//********** 休眠设置界面 **********
-#define sleepSettings_x1 2
-#define sleepSettings_x2 105
-#define sleepSettings_y1 14
-#define sleepSettings_y2 29
 void sleepSettings()
 {
     u8g2.setCursor(sleepSettings_x1, sleepSettings_y1);
@@ -204,12 +187,6 @@ void sleepSettings()
     }
 }
 
-//********** OLED亮度设置界面 **********
-#define oledSettings_x1 2
-#define oledSettings_x2 106
-#define oledSettings_x3 86
-#define oledSettings_y1 14
-#define oledSettings_y2 29
 void oledSettings()
 {
     if (oledSettings_kxxk_count == 3) //第2页
@@ -266,11 +243,6 @@ void oledSettings()
     }
 }
 
-//********** 电源设置界面 **********
-#define powerSettings_x1 2
-#define powerSettings_x2 100
-#define powerSettings_y1 14
-#define powerSettings_y2 29
 void powerSettings()
 {
     if (powerSettings_kxxk_count == 3) //第2页
@@ -339,12 +311,6 @@ void powerSettings()
         break;
     }
 }
-//********** 烙铁设置界面 **********
-#define t12Settings_x1 2
-#define t12Settings_x4 105
-
-#define t12Settings_y1 14
-#define t12Settings_y2 29
 
 void t12Settings()
 {
@@ -406,19 +372,7 @@ void t12Settings()
         break;
     }
 }
-//********** 校准设置界面 **********
-#define calibrationSettings_x1 0
 
-#define calibrationSettings_x2 30
-#define calibrationSettings_x3 54
-#define calibrationSettings_x4 80
-#define calibrationSettings_x5 106
-
-#define calibrationSettings_x6 102
-
-#define calibrationSettings_y1 7
-#define calibrationSettings_y2 18
-#define calibrationSettings_y3 31
 void calibrationSettings()
 {
     u8g2.setFont(u8g2_font_lucasfont_alternate_tr);
@@ -519,4 +473,3 @@ void calibrationSettings()
         break;
     }
 }
-

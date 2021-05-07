@@ -1,9 +1,8 @@
-//定时器2
-uint16_t last_move_time = 0;
-uint16_t screen_saver_past = 0;
-uint16_t time_past = 0;
-#define HEAT_STOP_TIME 600    //seconds
-#define SCTRRN_SAVER_TIME 180 //seconds
+#include "defs.h"
+#include "pins.h"
+#include "SleepTimer.h"
+#include "buzzer.h"
+#include <EEPROM.h>
 
 void checkSleep()
 {

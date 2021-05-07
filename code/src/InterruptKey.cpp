@@ -1,10 +1,10 @@
-
-#define KEYCODE_Enter 0
-#define KEYCODE_RIGHT 1
-#define KEYCODE_LEFT 2
-#define KEYCODE_UP 3
-#define KEYCODE_DOWN 4
-
+#include "defs.h"
+#include "pins.h"
+#include "InterruptKey.h"
+#include "SleepTimer.h"
+#include "analogRead.h"
+#include "display.h"
+#include "CurveFitting.h"
 void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length)
 {
     if (event != EVENT_RELEASED)
@@ -40,7 +40,7 @@ void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length)
         return;
     }
 
-    buzzer(50);
+    //buzzer(50);
     switch (display_count)
     {
     case HOME:
@@ -105,12 +105,12 @@ void handleEnterLongPress()
     if (display_count == HOME)
     {
         display_count = SETTINGS; //在主界面时进入设置界面
-        buzzer(200);
+        //buzzer(200);
     }
     else if (display_count != SETTINGS_CALIBRATION)
     {
         display_count = HOME; //在其他界面是退出至主界面
-        buzzer(200);
+        //buzzer(200);
     }
 }
 

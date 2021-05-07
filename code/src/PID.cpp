@@ -1,3 +1,6 @@
+#include "defs.h"
+#include "PID.h"
+#include "Buzzer.h"
 //********** PID算法 **********
 //算法来至https://blog.csdn.net/foxclever/article/details/105006205 By foxclever
 void pid()
