@@ -4,6 +4,8 @@
 #include "buzzer.h"
 #include <EEPROM.h>
 
+boolean enable_reed_switch = false;
+
 void checkSleep()
 {
     if (sleep_time == 999)
@@ -32,7 +34,14 @@ void processSleep()
 {
     if (t12_switch == 1) //烙铁启动，打开休眠判断决策
     {
-
+        if (enable_reed_switch && zjm_sleep_ts==0)
+        {
+            if (!(digitalRead(t12_sleep_pin)))
+            {
+                triggerSleep();
+            }
+            return;
+        }
         if (time_past >= sleep_time && zjm_sleep_ts == 0)
         {
             triggerSleep();
@@ -53,6 +62,17 @@ void processStopHeat()
 }
 bool isMoved()
 {
+    if (enable_reed_switch)
+    {
+        if (digitalRead(t12_sleep_pin))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     if (sleep_state != digitalRead(t12_sleep_pin)) //烙铁动了，计数清零
     {
         sleep_state = !sleep_state; //状态取反

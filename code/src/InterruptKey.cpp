@@ -19,11 +19,9 @@ void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length)
         keycode = KEYCODE_RIGHT;
         break;
     case DT:
-    case TX:
         keycode = KEYCODE_LEFT;
         break;
     case CLK:
-    case RX:
         keycode = KEYCODE_Enter;
 
         if (length < 1000)
@@ -33,7 +31,7 @@ void onKeyPress(uint8_t key, uint8_t event, uint8_t count, uint16_t length)
         else
         {
             handleEnterLongPress();
-            Serial.print("handleEnterLongPress");
+            //Serial.print("handleEnterLongPress");
         }
         return;
     default:
@@ -676,15 +674,19 @@ void calibrationMove(int keycode) //设置界面 旋转
     }
 }
 
-KeyStatus sw_status;
-KeyStatus dt_status;
-KeyStatus clk_status;
+KeyStatus keystatus[3];
+uint8_t pins[3]={SW,DT,CLK};
 
 void keyLoop()
 {
-    //checkKey(SW, sw_status);
-    //checkKey(DT, dt_status);
-    //checkKey(CLK, clk_status);
+  for(int i=0;i<3;i++){
+    checkKey(pins[i],keystatus[i]);
+  }
+    // checkKey(SW, sw_status);
+    // checkKey(CLK, sw_status);
+    // checkKey(DT, dt_status);
+    // checkKey(CLK, clk_status);
+    //checkKey(pins[0],keystatus[0]);
 }
 
 void checkKey(uint8_t pin, KeyStatus &status)
