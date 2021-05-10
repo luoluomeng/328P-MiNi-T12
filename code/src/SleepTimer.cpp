@@ -10,7 +10,12 @@ void checkSleep()
 {
     if (sleep_time == 999)
     {
+        enable_reed_switch = true;
         return;
+    }
+    else
+    {
+        enable_reed_switch = false;
     }
     if (last_move_time == 0)
     {
@@ -34,7 +39,7 @@ void processSleep()
 {
     if (t12_switch == 1) //烙铁启动，打开休眠判断决策
     {
-        if (enable_reed_switch && zjm_sleep_ts==0)
+        if (enable_reed_switch && zjm_sleep_ts == 0)
         {
             if (!(digitalRead(t12_sleep_pin)))
             {
