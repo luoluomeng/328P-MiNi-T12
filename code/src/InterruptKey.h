@@ -14,11 +14,11 @@
 
 typedef struct KeyStatus
 {
-    bool status;
+    bool status = 1;
     bool ready = false;
     bool reset_count = true;
-    unsigned long event_start;
-    unsigned long event_length;
+    unsigned long event_start = 0;
+    unsigned long event_length = 0;
     unsigned char event_count = 0;
 };
 

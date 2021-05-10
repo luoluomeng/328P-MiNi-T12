@@ -675,13 +675,14 @@ void calibrationMove(int keycode) //设置界面 旋转
 }
 
 KeyStatus keystatus[3];
-uint8_t pins[3]={SW,DT,CLK};
+uint8_t pins[3] = {SW, DT, CLK};
 
 void keyLoop()
 {
-  for(int i=0;i<3;i++){
-    checkKey(pins[i],keystatus[i]);
-  }
+    for (int i = 0; i < 3; i++)
+    {
+        checkKey(pins[i], keystatus[i]);
+    }
     // checkKey(SW, sw_status);
     // checkKey(CLK, sw_status);
     // checkKey(DT, dt_status);
@@ -693,7 +694,7 @@ void checkKey(uint8_t pin, KeyStatus &status)
 {
 
     unsigned char event = EVENT_NONE;
-
+    pinMode(pin, INPUT_PULLUP);
     if (digitalRead(pin) != status.status)
     {
 
