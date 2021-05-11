@@ -11,7 +11,7 @@ void checkSleep()
     if (sleep_time == 999)
     {
         enable_reed_switch = true;
-        return;
+        //return;
     }
     else
     {
