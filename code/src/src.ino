@@ -69,9 +69,9 @@
 
 void initPins()
 {
-    pinMode(SW, INPUT_PULLUP);            //右键
-    pinMode(RX, INPUT_PULLUP);            //按下
-    pinMode(TX, INPUT_PULLUP);            //左键
+    pinMode(SW, INPUT_PULLUP); //右键
+    //pinMode(RX, INPUT_PULLUP);            //按下
+    //pinMode(TX, INPUT_PULLUP);            //左键
     pinMode(t12_temp_pin, INPUT);         //t12温度
     pinMode(t12_sleep_pin, INPUT_PULLUP); //t12休眠
     pinMode(vin_pin, INPUT);              //电源电压

@@ -16,18 +16,18 @@ extern U8G2_SSD1306_128X32_UNIVISION_2_HW_I2C u8g2; //SSD1306  0.96寸OLED
 extern const uint8_t chinese_t12[1591];
 
 //********** 引脚定义 **********
-#define SW PIN2  //右
-#define CLK PIN1 //按下
-#define DT PIN32 //左
-#define RX PIN30 //按下
-#define TX PIN31 //左
+#define SW PIN9   //右
+#define CLK PIN10 //按下
+#define DT PIN11  //左
+// #define RX PIN30 //按下
+// #define TX PIN31 //左
 //除了10号脚不能改，其他都可以改，但模拟引脚只能改模拟引脚（休眠引脚除外）
-#define t12_sleep_pin PIN16 //t12休眠   模拟读取引脚
-#define t12_temp_pin PIN25  //A2 t12温度   模拟读取引脚
-#define tc1047_pin PIN26    //A3 机内温度   模拟读取引脚
-#define vin_pin PIN19       //A6 电源电压   模拟读取引脚
-#define t12_pwm_pin PIN14   //t12加热    pwm输出引脚，定死不可更改
-#define buzzer_pin PIN12    //蜂鸣器     输出引脚
+#define t12_sleep_pin PIN2 //t12休眠   模拟读取引脚
+#define t12_temp_pin PIN25 //A2 t12温度   模拟读取引脚
+#define tc1047_pin PIN26   //A3 机内温度   模拟读取引脚
+#define vin_pin PIN19      //A6 电源电压   模拟读取引脚
+#define t12_pwm_pin PIN14  //t12加热    pwm输出引脚，定死不可更改
+#define buzzer_pin PIN1    //蜂鸣器     输出引脚
 //************ EEPROM地址定义 ************
 extern uint8_t auto_get;                              //自动刷写eeprom的状态存储，判断是否首次开机 0-首次 1-非首次
 #define auto_get_eeprom 0                             //自动刷写eeprom的状态存储，1位
